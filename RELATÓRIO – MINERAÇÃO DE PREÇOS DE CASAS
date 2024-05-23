@@ -1,0 +1,178 @@
+MINERAÇÃO DE PREÇOS DE CASAS
+
+
+Explicação do Código:
+
+import pandas as pd 
+import numpy as np 
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression 
+from sklearn.metrics import mean_squared_error, r2_score 
+from sklearn.preprocessing import StandardScaler 
+dados = pd.read_csv("/content/PRECOS_CASAS.csv") 
+
+O código fornecido envolve o carregamento de um conjunto de dados CSV e a preparação para a construção de um modelo de regressão linear para prever preços de casas. Vamos analisar cada etapa em detalhes:
+Resultado: 
+
+
+
+     Casa   Preco  Area  Quartos  Banheiros  Ofertas Tijolo Bairro
+0       1  114300  1790        2          2        2     No  Leste
+1       2  114200  2030        4          2        3     No  Leste
+2       3  114800  1740        3          2        1     No  Leste
+3       4   94700  1980        3          2        3     No  Leste
+4       5  119800  2130        3          3        3     No  Leste
+..    ...     ...   ...      ...        ...      ...    ...    ...
+123   124  119700  1900        3          3        3    Yes  Leste
+124   125  147900  2160        4          3        3    Yes  Leste
+125   126  113500  2070        2          2        2     No  Norte
+126   127  149900  2020        3          3        1     No  Oeste
+127   128  124600  2250        3          3        4     No  Norte
+
+[128 rows x 8 columns]
+
+–
+
+
+
+
+
+
+Texto: Explique o que está acontecendo neste trecho de código 
+
+X = dados[["Area", "Quartos", "Banheiros"]] 
+
+y = dados["Preco"] 
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42) 
+
+Resposta:
+
+O trecho de código se concentra no pré-processamento de dados para preparar os conjuntos de treinamento e teste para um modelo de regressão linear de previsão de preço de casas.
+
+–
+
+Texto: Explique o que está acontecendo neste trecho de código 
+
+ 
+modelo = LinearRegression() 
+
+modelo.fit(X_train, y_train) 
+
+Resposta:
+
+Esse trecho de código envolve a criação e o treinamento de um modelo de regressão linear para prever o preço de casas.
+
+–
+
+Texto: Explique o que é regressão linear e seus objetivos 
+
+A regressão linear é uma técnica estatística que nos permite modelar a relação entre uma variável que queremos prever (dependente) e uma ou mais variáveis ​​que a influenciam (independentes). Através de uma equação linear, podemos prever valores para novos dados e entender como as variáveis ​​se relacionam.
+
+Objetivos:
+
+-Prever valores para novos dados
+-Explicar como as variáveis ​​se relacionam
+-Quantificar a influência de cada variável
+
+–
+
+Texto: Explique o que está acontecendo neste trecho de código e coloque também a resposta de saída. 
+
+y_pred = modelo.predict(X_test) 
+
+ 
+
+rmse = mean_squared_error(y_test, y_pred) 
+
+print(f"RMSE: {rmse:.2f}") 
+
+ 
+
+r2 = r2_score(y_test, y_pred) 
+
+print(f"R²: {r2:.2f}") 
+
+Resposta de saída: 
+
+RMSE: 320149938.23
+R²: 0.46
+
+
+Explicação: 
+
+O código fornecido, em conjunto com as importações das bibliotecas matplotlib.pyplot e seaborn, permite avaliar o desempenho de um modelo de regressão linear treinado para prever o preço de casas.
+ 
+
+–
+
+
+print(f"Coeficientes: {modelo.coef_}") 
+
+ 
+
+ 
+
+Texto: Explique o que está acontecendo neste trecho de código e coloque também a resposta de saída.
+
+Resultado de Saída:
+
+Coeficientes: [   41.44755181 10278.00910207 13090.39118144] 
+
+Explicação:
+
+O código visa Exibir os coeficientes do modelo linear treinado.
+
+—
+
+import matplotlib.pyplot as plt 
+
+import seaborn as sns 
+
+ 
+
+Texto: Explique o que está acontecendo neste trecho de código 
+
+Resposta:
+
+O cógido Importa duas bibliotecas importantes para visualização de dados
+
+—
+
+Texto: Explique o que está acontecendo neste trecho de código, coloque o gráfico Gerado e explique o que é um gráfico de distribuição. 
+
+ 
+
+ # Correlação entre Variáveis 
+
+plt.figure(figsize=(10, 6)) 
+
+sns.heatmap(dados[["Area", "Quartos", "Banheiros", "Preco"]].corr(), annot=True) 
+
+plt.title("Mapa de Calor: Correlação entre Variáveis") 
+
+plt.show() 
+
+Explicação:
+
+
+
+O código gera um mapa de calor para visualizar a correlação entre as variáveis "Área", "Quartos", "Banheiros" e "Preço" no conjunto de dados, fornecendo insights sobre as relações entre elas e auxiliando na análise exploratória.
+
+(Não consegui gerar os gráficos 🙁)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
